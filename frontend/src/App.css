@@ -1,0 +1,28 @@
+/*import styled from 'styled-components';*/
+
+/*const AppContainer = styled.div`*/
+/*  width: 100%;*/
+/*  overflow-x: hidden; // Предотвращаем горизонтальную прокрутку*/
+/*`;*/
+
+/*const ContentContainer = styled.div`*/
+/*  position: relative;*/
+/*  z-index: 3; // Задаем z-index выше, чтобы контент был поверх карусели*/
+/*`;*/
+
+/*// Стили для параллакс-контейнера*/
+/*const ParallaxContainer = styled.div`*/
+/*  background: url('../static/noch-luna-planeta.png') no-repeat center center fixed;*/
+/*  background-size: cover;*/
+/*  height: 100%;*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*`;*/
+
+/*const ParallaxOverlay = styled.div`*/
+/*  position: absolute;*/
+/*  width: 100%;*/
+/*  height: 100%;*/
+/*  background: rgba(0, 0, 0, 0.6);*/
+/*  z-index: 1; // Устанавливаем z-index для наложения*/
+/*`;*/

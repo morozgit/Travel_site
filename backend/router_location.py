@@ -27,9 +27,9 @@ async def get_locations() -> list[SLocation]:
 
 @location_router.get("/{location}")
 async def get_location(location: int):
-    locations = await TrackRepository.get_location_tracks()
+    tracks = await TrackRepository.get_location_tracks(location)
     print('locations', location)
-    # return tracks
+    return tracks
 
 @location_router.post("/delete_location")
 async def delete_all_location() -> list[SLocation]:
