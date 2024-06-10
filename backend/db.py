@@ -5,7 +5,7 @@ from sqlalchemy import ForeignKey, text
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 
-URL_DATABASE = 'postgresql+asyncpg://postgres:postgres@127.0.0.1:5433/postgres'
+URL_DATABASE = 'postgresql+asyncpg://postgres:postgres@127.0.0.1:5432/postgres'
 engine = create_async_engine(URL_DATABASE, echo=True)
 new_session = async_sessionmaker(engine, expire_on_commit=False)
 

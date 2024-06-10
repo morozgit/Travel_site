@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -19,7 +20,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 app.include_router(location_router)
 app.include_router(track_router)
-app.mount("/static", StaticFiles(directory="../frontend/static"), name="static")
+current_file_path = os.path.dirname(os.path.abspath(__file__))
+static_files_path = os.path.join(current_file_path, '..', 'frontend', 'static')
+
+app.mount("/static", StaticFiles(directory=static_files_path), name="static")
 
 
 origins = [
