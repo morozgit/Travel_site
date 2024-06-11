@@ -21,7 +21,9 @@ app = FastAPI(lifespan=lifespan)
 app.include_router(location_router)
 app.include_router(track_router)
 current_file_path = os.path.dirname(os.path.abspath(__file__))
-static_files_path = os.path.join(current_file_path, '..', 'frontend', 'static')
+print('current_file_path', current_file_path)
+static_files_path = os.path.join(current_file_path, '../..', 'frontend', 'static')
+print('static_files_path', static_files_path)
 
 app.mount("/static", StaticFiles(directory=static_files_path), name="static")
 
