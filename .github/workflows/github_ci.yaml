@@ -49,31 +49,15 @@ jobs:
           sleep 5
         done
 
-    - name: Set environment variables for tests
-      run: |
-        echo "DB_USER_TEST=postgres" >> $GITHUB_ENV
-        echo "DB_PASS_TEST=postgres" >> $GITHUB_ENV
-        echo "DB_HOST_TEST=localhost" >> $GITHUB_ENV
-        echo "DB_PORT_TEST=6432" >> $GITHUB_ENV
-        echo "DB_NAME_TEST=track" >> $GITHUB_ENV
-
-    - name: Check environment variables
-      run: |
-        echo "DB_USER_TEST=$DB_USER_TEST"
-        echo "DB_PASS_TEST=$DB_PASS_TEST"
-        echo "DB_HOST_TEST=$DB_HOST_TEST"
-        echo "DB_PORT_TEST=$DB_PORT_TEST"
-        echo "DB_NAME_TEST=$DB_NAME_TEST"
-
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
-        DATABASE_URL_TEST: postgres://postgres:postgres@localhost:6432/track
-        DB_USER_TEST: postgres
-        DB_PASS_TEST: postgres
+        DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6432/postgres"
         DB_HOST_TEST: localhost
         DB_PORT_TEST: 6432
-        DB_NAME_TEST: track
+        DB_NAME_TEST: postgres
+        DB_USER_TEST: postgres
+        DB_PASS_TEST: postgres
       run: |
         pytest
 
