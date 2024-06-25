@@ -19,11 +19,6 @@ jobs:
           - 5433:5433
         env:
           DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5433/postgres
-          DB_HOST: localhost
-          DB_PORT: 5433
-          DB_NAME: postgres
-          DB_USER: postgres
-          DB_PASS: postgres
         options: >-
           --health-cmd "pg_isready -U postgres"
           --health-interval 10s
@@ -56,11 +51,6 @@ jobs:
       working-directory: ./backend/test_backend
       env:
         DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6433/postgres
-        DB_HOST_TEST: localhost
-        DB_PORT_TEST: 6432
-        DB_NAME_TEST: postgres
-        DB_USER_TEST: postgres
-        DB_PASS_TEST: postgres
       run: |
         pytest
 
