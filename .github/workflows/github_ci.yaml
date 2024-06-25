@@ -22,7 +22,7 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: track
         options: >-
-          --health-cmd pg_isready
+          --health-cmd "pg_isready -U postgres"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -35,12 +35,19 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.12' # Задайте нужную версию Python
+        python-version: '3.12'
 
     - name: Install backend dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+
+    - name: Wait for Postgres
+      run: |
+        until pg_isready -h localhost -p 6432 -U postgres; do
+          echo "Waiting for postgres..."
+          sleep 5
+        done
 
     - name: Run backend tests
       working-directory: ./backend/test_backend
@@ -53,7 +60,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: '20.13.1' # Задайте нужную версию Node.js
+        node-version: '20.13.1'
 
     - name: Install frontend dependencies
       working-directory: ./frontend
