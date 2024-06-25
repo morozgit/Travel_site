@@ -16,7 +16,7 @@ jobs:
       postgres:
         image: postgres:latest
         ports:
-          - 6432:5432
+          - 5432:5432
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -54,7 +54,7 @@ jobs:
         echo "DB_USER_TEST=postgres" >> $GITHUB_ENV
         echo "DB_PASS_TEST=postgres" >> $GITHUB_ENV
         echo "DB_HOST_TEST=localhost" >> $GITHUB_ENV
-        echo "DB_PORT_TEST=6432" >> $GITHUB_ENV
+        echo "DB_PORT_TEST=5432" >> $GITHUB_ENV
         echo "DB_NAME_TEST=track" >> $GITHUB_ENV
 
     - name: Check environment variables
@@ -68,11 +68,11 @@ jobs:
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:6432/track
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/track
         DB_USER_TEST: postgres
         DB_PASS_TEST: postgres
         DB_HOST_TEST: localhost
-        DB_PORT_TEST: 6432
+        DB_PORT_TEST: 5432
         DB_NAME_TEST: track
       run: |
         pytest
