@@ -18,6 +18,7 @@ jobs:
         ports:
           - 5432:5432
         env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5433/postgres
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: postgres
@@ -52,7 +53,7 @@ jobs:
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
-        DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6432/postgres
+        DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6433/postgres
         DB_HOST_TEST: localhost
         DB_PORT_TEST: 6432
         DB_NAME_TEST: postgres
