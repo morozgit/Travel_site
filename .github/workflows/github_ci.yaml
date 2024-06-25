@@ -52,7 +52,7 @@ jobs:
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:6432/track
+        DATABASE_URL_TEST: postgres://postgres:postgres@localhost:6432/track
       run: |
         pytest
 
