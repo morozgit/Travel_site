@@ -16,7 +16,7 @@ jobs:
       postgres:
         image: postgres:latest
         ports:
-          - 6432:5432
+          - 5432:5432
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
@@ -44,7 +44,7 @@ jobs:
 
     - name: Wait for Postgres
       run: |
-        until pg_isready -h localhost -p 6432 -U postgres; do
+        until pg_isready -h localhost -p 5432 -U postgres; do
           echo "Waiting for postgres..."
           sleep 5
         done
@@ -52,12 +52,12 @@ jobs:
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
-        DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6432/postgres"
-        DB_HOST_TEST: localhost
-        DB_PORT_TEST: 6432
-        DB_NAME_TEST: postgres
-        DB_USER_TEST: postgres
-        DB_PASS_TEST: postgres
+        DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/postgres"
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: postgres
+        DB_USER: postgres
+        DB_PASS: postgres
       run: |
         pytest
 
