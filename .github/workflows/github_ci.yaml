@@ -48,7 +48,11 @@ jobs:
           echo "Waiting for postgres..."
           sleep 5
         done
-
+    - name: Check DATABASE_URL
+      run: echo $DATABASE_URL
+      env:
+        DATABASE_URL: postgres://postgres:postgres@localhost:6432/track
+    
     - name: Run backend tests
       working-directory: ./backend/test_backend
       env:
