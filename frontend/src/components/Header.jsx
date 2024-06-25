@@ -33,9 +33,8 @@ const Logo = styled.img`
 
 const Header = () => (
   <HeaderContainer>
-    <Logo src="../static/logo.png" alt="logo" />
+    <NavLink to="/"><Logo src="../static/logo.png" alt="logo" /></NavLink>
     <Nav>
-      <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/services">Services</NavLink>
       <NavLink to="/contact">Contact</NavLink>

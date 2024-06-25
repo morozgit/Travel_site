@@ -36,7 +36,6 @@ function TrackCard() {
       ) : (
         <Row gutter={[16, 16]}>
           {tracks.map(track => {
-             const imageUrl = `/static/${track.image}`;
             return (
               <Col key={track.id} xs={24} sm={12} md={8} lg={6}>
                 <Card
@@ -44,7 +43,7 @@ function TrackCard() {
                   style={{ width: '100%' }}
                 >
                   <p>{track.name}</p>
-                  <img src={imageUrl} alt={track.name}/>
+                  <img src={`../${track.image}`} alt={track.name}/>
                   <p>{track.description}</p>
                 </Card>
               </Col>
