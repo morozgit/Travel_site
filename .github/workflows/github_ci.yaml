@@ -31,9 +31,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Run postgres from Docker
-      run: docker run --name track_test -p 6432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
-
     # Backend setup
     - name: Set up Python
       uses: actions/setup-python@v2
