@@ -25,6 +25,11 @@ jobs:
       working-directory: ./frontend
       run: npm install
 
+    - name: Install tailwindcss
+      working-directory: ./frontend
+      run: npm install tailwindcss
+
+
     - name: Build frontend
       working-directory: ./frontend
       run: npm run dev
