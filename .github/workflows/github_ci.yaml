@@ -15,19 +15,19 @@ jobs:
     services:
       postgres:
         image: postgres:latest
-        ports:
-          - 5433:5433
         env:
-          DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5433/postgres
+          POSTGRES_PASSWORD: postgres
         options: >-
-          --health-cmd "pg_isready -U postgres"
+          --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     # Backend setup
     - name: Set up Python
@@ -42,16 +42,15 @@ jobs:
 
     - name: Wait for Postgres
       run: |
-        until pg_isready -h localhost -p 5433 -U postgres; do
+        until pg_isready -h localhost -p 5432 -U postgres; do
           echo "Waiting for postgres..."
           sleep 5
         done
 
     - name: Run backend tests
       working-directory: ./backend/test_backend
-      env:
-        DATABASE_URL_TEST: postgresql+asyncpg://postgres:postgres@postgres:6433/postgres
       run: |
+        docker run --name track_test -p 6432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
         pytest
 
     # Frontend setup
