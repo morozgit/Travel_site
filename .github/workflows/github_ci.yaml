@@ -60,6 +60,11 @@ jobs:
     - name: Run backend tests
       working-directory: ./backend/test_backend
       run: |
+        echo "DB_HOST_TEST=localhost" >> $GITHUB_ENV
+        echo "DB_NAME_TEST=postgres" >> $GITHUB_ENV
+        echo "DB_USER_TEST=postgres" >> $GITHUB_ENV
+        echo "DB_PASS_TEST=postgres" >> $GITHUB_ENV
+        echo "DB_PORT_TEST=6432" >> $GITHUB_ENV
         docker run --name track_test -p 6432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
         pytest
 
