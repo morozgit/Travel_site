@@ -54,7 +54,7 @@ jobs:
 
     - name: Run frontend build
       working-directory: ./frontend
-      run: npm run build
+      run: npm run dev
 
     # Optionally, you can add frontend tests here
     # - name: Run frontend tests
