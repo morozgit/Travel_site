@@ -29,5 +29,5 @@ jobs:
 
     steps:
     - name: Run backend tests
-      working-directory: ./backend
+      working-directory: /backend/test_backend
       run:  pytest
