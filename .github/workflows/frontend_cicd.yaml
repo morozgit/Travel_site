@@ -22,7 +22,6 @@ jobs:
         node-version: '20.13.1'
 
     - name: Install dependencies
-      working-directory: ./frontend
       run: npm install
 
     - name: Run frontend build
