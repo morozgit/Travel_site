@@ -29,7 +29,8 @@ jobs:
       - name: Install tailwindcss
         working-directory: ./frontend
         run: |
-          npm install tailwindcss
+          npm install -D tailwindcss postcss autoprefixer vite
+          npm tailwindcss init
 
       - name: Build frontend
         working-directory: ./frontend
