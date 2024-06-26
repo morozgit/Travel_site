@@ -24,8 +24,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Install tailwindcss
-      run: npm install tailwindcss
 
     - name: Build frontend
-      run: npm run build
+      run: npm run dev
