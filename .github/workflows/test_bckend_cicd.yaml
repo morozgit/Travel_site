@@ -28,12 +28,21 @@ jobs:
           - 6432:5432
 
     steps:
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.12'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Run backend tests
-      run:  |
-        pip install pytest
-        pytest
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.4'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run backend tests
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:6432/postgres
+        run: |
+          pip install pytest
+          pytest
