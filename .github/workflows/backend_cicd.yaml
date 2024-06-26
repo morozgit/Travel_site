@@ -42,21 +42,4 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # Frontend setup
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20.13.1'
 
-    - name: Install frontend dependencies
-      working-directory: ./frontend
-      run: npm install
-
-    - name: Run frontend build
-      working-directory: ./frontend
-      run: npm run dev
-
-    # Optionally, you can add frontend tests here
-    # - name: Run frontend tests
-    #   working-directory: ./frontend
-    #   run: npm test
