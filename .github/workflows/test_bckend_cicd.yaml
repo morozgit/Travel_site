@@ -12,44 +12,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres:latest
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test_db
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 6432:5432  # Тестовая БД работает на порту 6432
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12.4'
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
-      - name: Wait for Postgres to be ready
-        run: |
-          until pg_isready -h localhost -p 6432; do
-            echo "Waiting for postgres..."
-            sleep 2
-          done
-
-      - name: Run backend tests
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost:6432/test_db
-          PYTHONPATH: ${{ github.workspace }}/backend/src  # Настройка PYTHONPATH
-        run: |
-          pytest
+    - name: Run backend tests
+      run:  |
+        pip install pytest
+        pytest
