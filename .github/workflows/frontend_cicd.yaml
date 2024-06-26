@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -22,9 +22,7 @@ jobs:
           node-version: '20.13.1'
 
       - name: Install dependencies
-        working-directory: ./frontend
-        run: |
-          npm install
+        uses: bahmutov/npm-install@v1
 
       - name: Install tailwindcss
         working-directory: ./frontend
@@ -32,8 +30,14 @@ jobs:
           npm update
           npm install autoprefixer
 
-
       - name: Build frontend
         working-directory: ./frontend
-        run: |
-          npm run dev
+        run: npm run build
+
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v3
+        with:
+          name: production-files
+          path: ./dist
+
+
