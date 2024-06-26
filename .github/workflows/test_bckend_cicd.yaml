@@ -29,4 +29,6 @@ jobs:
 
     steps:
     - name: Run backend tests
-      run:  pytest
+      run:  |
+        pip install pytest
+        pytest
