@@ -28,6 +28,11 @@ jobs:
           - 6432:5432
 
     steps:
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+
     - name: Run backend tests
       run:  |
         pip install pytest
