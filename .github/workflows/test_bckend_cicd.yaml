@@ -1,0 +1,33 @@
+name: test_backend CI/CD
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER_TEST: postgres
+          POSTGRES_PASSWORD_TEST: postgres
+          POSTGRES_DB_TEST: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6432:5432
+
+    steps:
+    - name: Run backend tests
+      working-directory: ./backend
+      run:  pytest
