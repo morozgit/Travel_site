@@ -34,5 +34,5 @@ jobs:
       - name: Run backend tests
         working-directory: ./backend
         run:  |
-          docker run --name test_track -p 6432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:latest
+          docker run --name test_track -p 7432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:latest
           pytest
