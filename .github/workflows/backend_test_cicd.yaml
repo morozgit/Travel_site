@@ -35,5 +35,6 @@ jobs:
         working-directory: ./backend
         run:  |
           docker run --name test_track -p 7432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:latest
-          pip install pytest
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
           pytest
