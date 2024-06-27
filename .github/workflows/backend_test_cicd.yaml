@@ -16,9 +16,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER_TEST: postgres
-          POSTGRES_PASSWORD_TEST: postgres
-          POSTGRES_DB_TEST: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -34,4 +34,5 @@ jobs:
       - name: Run backend tests
         working-directory: ./backend
         run:  |
+          docker run --name test_track -p 6432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:lastest
           pytest
