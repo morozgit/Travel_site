@@ -38,4 +38,5 @@ jobs:
           pip install pytest
           pip install httpx
           pip install sqlalchemy
+          pip install python-dotenv
           pytest
