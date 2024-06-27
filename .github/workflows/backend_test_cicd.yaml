@@ -37,4 +37,5 @@ jobs:
           docker run --name test_track -p 7432:5432 -e POSTGRES_PASSWORD=postgres -d postgres:latest
           pip install pytest
           pip install httpx
+          pip install sqlalchemy
           pytest
