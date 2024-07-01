@@ -50,9 +50,10 @@ jobs:
         echo "DATABASE_URL=postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/${{ env.DB_NAME_TEST }}" >> $GITHUB_ENV
 
     - name: Debug ENV variables
-      run: printenv
+      run: |
+        printenv | sort
 
     - name: Run tests
       run: |
-        export DATABASE_URL="postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/${{ env.DB_NAME_TEST }}"
+        echo $DATABASE_URL
         pytest
