@@ -44,12 +44,16 @@ jobs:
     - name: Set PYTHONPATH
       run: |
         echo "PYTHONPATH=$(pwd)/backend/src" >> $GITHUB_ENV
+        echo "PYTHONPATH=$(pwd)/backend/test_backend" >> $GITHUB_ENV
 
     - name: Set DATABASE_URL environment variable
       run: |
-        echo "DATABASE_URL=postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/postgres" >> $GITHUB_ENV
+        echo "DATABASE_URL=postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/${{ env.DB_NAME_TEST }}" >> $GITHUB_ENV
+
+    - name: Debug ENV variables
+      run: printenv
 
     - name: Run tests
       run: |
-        export DATABASE_URL="postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/postgres"
+        export DATABASE_URL="postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/${{ env.DB_NAME_TEST }}"
         pytest
