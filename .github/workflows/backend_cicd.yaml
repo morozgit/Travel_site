@@ -43,8 +43,7 @@ jobs:
 
     - name: Set PYTHONPATH
       run: |
-        echo "PYTHONPATH=$(pwd)/backend/src" >> $GITHUB_ENV
-        echo "PYTHONPATH=$(pwd)/backend/test_backend" >> $GITHUB_ENV
+        echo "PYTHONPATH=$(pwd)/backend/src:$(pwd)/backend/test_backend" >> $GITHUB_ENV
 
     - name: Set DATABASE_URL environment variable
       run: |
