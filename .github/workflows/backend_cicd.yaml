@@ -22,30 +22,34 @@ jobs:
           POSTGRES_DB: postgres
 
     env:
-      DB_HOST_TEST: ${{ secrets.DB_HOST_TEST }}
-      DB_PORT_TEST: ${{ secrets.DB_PORT_TEST }}
-      DB_NAME_TEST: ${{ secrets.DB_NAME_TEST }}
-      DB_USER_TEST: ${{ secrets.DB_USER_TEST }}
-      DB_PASS_TEST: ${{ secrets.DB_PASS_TEST }}
+      DB_HOST_TEST: localhost
+      DB_PORT_TEST: 6432
+      DB_NAME_TEST: postgres
+      DB_USER_TEST: postgres
+      DB_PASS_TEST: postgres
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v2
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v2
       with:
-        python-version: '3.12'
+        python-version: '3.8'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Set PYTHONPATH
+      run: |
+        echo "PYTHONPATH=$(pwd)/backend/src" >> $GITHUB_ENV
+
     - name: Set DATABASE_URL environment variable
       run: |
-        echo "DATABASE_URL=postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/postgres" >> $GITHUB_ENV
+        echo "DATABASE_URL=postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/postgres" >> $GITHUB_ENV
 
     - name: Run tests
       run: |
-        export DATABASE_URL="postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/postgres"
+        export DATABASE_URL="postgres://${{ env.DB_USER_TEST }}:${{ env.DB_PASS_TEST }}@${{ env.DB_HOST_TEST }}:${{ env.DB_PORT_TEST }}/postgres"
         pytest
