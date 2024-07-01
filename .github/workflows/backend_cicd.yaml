@@ -43,9 +43,9 @@ jobs:
 
     - name: Set DATABASE_URL environment variable
       run: |
-        echo "DATABASE_URL=postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/test_db" >> $GITHUB_ENV
+        echo "DATABASE_URL=postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/postgres" >> $GITHUB_ENV
 
     - name: Run tests
       run: |
-        export DATABASE_URL="postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/test_db"
+        export DATABASE_URL="postgres://${{ secrets.DB_USER_TEST }}:${{ secrets.DB_PASS_TEST }}@${{ secrets.DB_HOST_TEST }}:${{ secrets.DB_PORT_TEST }}/postgres"
         pytest
